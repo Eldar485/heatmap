@@ -1,0 +1,8 @@
+.header {
+    display: flex;
+    padding: 1.5rem;
+}
+
+.header__item {
+    margin: 0 3rem;
+}
