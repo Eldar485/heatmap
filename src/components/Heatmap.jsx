@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet.heat";
 import axios from "axios";
+import testData from '../test.json';
 
 const Heatmap = ({currentCity, currentPlace, currentMethod}) => {
 
@@ -17,17 +18,12 @@ const Heatmap = ({currentCity, currentPlace, currentMethod}) => {
     useEffect(() => {
         let locations = [];
         let leafletMap = L.map(mapRef.current)
+        const volgaData = testData.map(data => [data.Latitude, data.Longitude, data.Coefficient])
+
 
         if (currentCity === 'Волгоград') {
             leafletMap.setView([48.7071, 44.5169], 13);
-            locations = [
-                [48.7071, 44.5169, 0.5],
-                [48.7233, 44.5517, 0.2],
-                [48.6806, 44.5363, 0.8],
-                [48.7119, 44.5292, 1],
-                [48.6845, 44.4814, 1],
-                // и т.д.
-            ];
+            locations = volgaData
         } else if (currentCity === 'Москва') {
             leafletMap.setView([55.751244, 37.618423], 13);
             locations = [
@@ -55,7 +51,7 @@ const Heatmap = ({currentCity, currentPlace, currentMethod}) => {
         setMap(leafletMap);
 
         setLocations(locations);
-        const heatLayer = L.heatLayer(locations, { radius: 50, blur: 50, opacity: 0.99, maxZoom: 1, minZoom: 0 }).addTo(leafletMap);
+        const heatLayer = L.heatLayer(locations, { radius: 50, blur: 50, maxZoom: 10, minZoom: 0 }).addTo(leafletMap);
 
         // Добавляем базовый слой карты
         const osmUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css'
 import Heatmap from "./components/Heatmap";
-import Header from "./components/Header/Header";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
     ]);
 
     const [currentCity, setCurrentCity] = useState('Волгоград');
-    const [currentMethod, setCurrentMethod] = useState('Метод N');
+    const [currentMethod, setCurrentMethod] = useState('Метод M');
 
     const selectCity = (city) => {
         setCurrentCity(city)
@@ -41,7 +41,7 @@ const App = () => {
 
     return (
         <div>
-            <Header
+            <Sidebar
                 cities={cities}
                 currentCity={currentCity}
                 selectCity={selectCity}
@@ -51,7 +51,7 @@ const App = () => {
                 methods={methods}
                 currentMethod={currentMethod}
                 selectMethod={selectMethod}/>
-            <Heatmap currentCity={currentCity} currentPlace={selectPlace} currentMethod={currentMethod} />
+            <Heatmap currentCity={currentCity} currentPlace={selectPlace} currentMethod={currentMethod}/>
         </div>
     );
 };
